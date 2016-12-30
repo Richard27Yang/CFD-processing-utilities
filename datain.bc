@@ -1,0 +1,99 @@
+!wall
+&bcdef bcdir='eta',block=1,bctype=3,start=1,1,1,end=240,1,1/
+
+&bcdef bcdir='eta',block=3,bctype=3,start=1,1,1,end=240,1,1/
+&bcdef bcdir='eta',block=4,bctype=3,start=1,1,1,end=240,1,1/
+&bcdef bcdir='eta',block=5,bctype=3,start=1,1,1,end=240,1,1/
+
+&bcdef bcdir='eta',block=6,bctype=3,start=1,1,1, end=200,1,1/
+&bcdef bcdir='eta',block=6,bctype=3,start=1,40,1,end=200,40,1/
+&bcdef bcdir='eta',block=7,bctype=3,start=1,1,1, end=240,1,1/
+&bcdef bcdir='eta',block=8,bctype=3,start=1,1,1, end=200,1,1/
+&bcdef bcdir='eta',block=8,bctype=3,start=1,40,1,end=200,40,1/
+
+!inlet
+&bcdef bcdir='eta',block=1, bctype=6,start=1,150,1,end=240,150,1/
+
+&bcdef bcdir='eta',block=5, bctype=5,start=1,150,1,end=40,150,1/
+
+&bcdef bcdir='eta',block=5, bctype=6,start=41,150,1,end=240,150,1/
+
+&bcdef bcdir='eta',block=2, bctype=6,start=1,150,1,end=160,150,1/
+
+!outlet
+&bcdef bcdir='eta',block=2, bctype=5,start=161,150,1,end=240,150,1/
+
+&bcdef bcdir='eta',block=3, bctype=5,start=1,150,1,end=240,150,1/
+&bcdef bcdir='eta',block=4, bctype=5,start=1,150,1,end=240,150,1/
+
+!injection
+&bcdef bcdir='xie',block=6, bctype=9,start=1,1,1,end=1,40,1/
+!suction
+&bcdef bcdir='xie',block=8, bctype=5,start=200,1,1,end=200,40,1/
+
+!BC7 jet
+&bcdef bcdir='xie',block=6,bctype=7, start= 200,1,1, end=200,40,1,
+                  iblock=7,         istart=  1,1,1, iend= 1,40,1,order=1,2,3/
+&bcdef bcdir='xie',block=7,bctype=7, start= 240,1,1, end=240,40,1,
+                  iblock=8,         istart=  1,1,1, iend= 1,40,1,order=1,2,3/
+
+!BC7 on top of jet
+&bcdef bcdir='eta',block=7,bctype=7,  start=1,40,1,   end= 240,40,1,
+                  iblock=2,          istart=1, 1,1,  iend= 240, 1,1,order=1,2,3/
+
+
+
+!BC7-ParallelComputation 
+&bcdef bcdir='xie',block=1,bctype= 7,    start= 240, 1,  1,  end= 240, 150, 1,
+		  iblock=2,             istart= 1,  1,  1, iend=  1, 150, 1, order=1,2,3/
+&bcdef bcdir='xie',block=2,bctype= 7,    start= 240, 1,  1,  end= 240, 150, 1,
+		  iblock=3,             istart= 1,  1,  1, iend=  1, 150, 1, order=1,2,3/
+&bcdef bcdir='xie',block=3,bctype= 7,    start= 240, 1,  1,  end= 240, 150, 1,
+		  iblock=4,             istart= 1,  1,  1, iend=  1, 150, 1, order=1,2,3/
+&bcdef bcdir='xie',block=4,bctype= 7,    start= 240, 1,  1,  end= 240, 150, 1,
+		  iblock=5,             istart= 1,  1,  1, iend=  1, 150, 1, order=1,2,3/
+&bcdef bcdir='xie',block=5,bctype= 7,    start= 240, 1,  1,  end= 240, 150, 1,
+		  iblock=1,             istart= 1,  1,  1, iend=  1, 150, 1, order=1,2,3/
+
+
+&bcdef bcdir='end'/
+
+&bcwake wbcdir='end'/
+&spec_output optype = 'end'/
+
+
+Boundary conditions:
+Note: Boundary conditions
+1      zero gradient
+2      supersonic inflow
+3      no slip adiabatic wall boundary
+4      zero gradient with w = 0
+5      subsonic outflow, fixed static pressure (poutlet in datain)
+6      subsonic inflow, fixed rho, u, v, w at inlet 
+7      inner boundary for mpi
+8      symmetry boundary
+9      subsonic inlet BC with fixed total pressure and temperature 
+10     periodic boundary condtion
+11     subsonic outflow, fixed static pressure (computed in code)
+19     isothermal wall, zero-gradient pressure
+40     periodic boundary condtion for flow variables only
+31     partial-slip wall boundary in rotation coordinates
+32     moving wall boundary
+33     dpdn = 0 wall boundary in rotation coordinates
+34     dpdn = 0, dtdn = 0, psi changes wall boundary in rotation coordinates
+35     dpdn = rv^2/r, dtdn = 0, wall boundary in rotation coordinates
+71     rotating periodic boundary conditio
+95     special case: specify u=1, v=w=0 (eg. lid cavity), j-upper boundary
+100    special case: shock/boundary layer interaction, j-upper boundary
+***
+101-110   isothermal wall, please modify the corresponding temperature value
+          (nondimensional temperature)
+          in namelist &iso_t-------->iso_tw,
+          For example, if in &bcdef bctype=105 is used , 
+                       the value of iso_tw at ! 105 should change to the
+                       value you want, for example, 1.02, 12.5,...
+========================================================================
+Note: Initial flow profiles (strm_dir)
+1      uniform flow
+4      Blasius profile (especially for benchmark case: super flat plate)
+=======================================================================
