@@ -1,0 +1,13 @@
+         160 0 !bc_max, bc_special
+          8   0   !nb, resart_step
+	  240 150 1
+	  240 150 1
+	  240 150 1
+	  240 150 1
+	  240 150 1
+     	  200  40  1
+	  240  40  1	
+     	  200  40  1  	    
+2       !The number of additional poutlet condition
+6,1,1, 150.93, 160.765, 1.0009522,  ! block num, v dir, vel mag, ps, pt and Tt, assuming Vcavity=0.5Vinf
+8,1,1, 150.426, 150.07, 1.0009522,  ! ps+0.6% pt-0.3% /init2.input

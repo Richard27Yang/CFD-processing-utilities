@@ -1,0 +1,49 @@
+&bcdef bcdir='xie', block=  1, bctype=7, start=  1,  1,  1, end=  1,150,  1
+                  ,iblock=  5,          istart=240,  1,  1,iend=240,150,  1, order=  1,  2,  3/
+&bcdef bcdir='xie', block=  1, bctype=7, start=240,  1,  1, end=240,150,  1
+                  ,iblock=  2,          istart=  1,  1,  1,iend=  1,150,  1, order=  1,  2,  3/
+&bcdef bcdir='xie', block=  2, bctype=7, start=240,  1,  1, end=240,150,  1
+                  ,iblock=  3,          istart=  1,  1,  1,iend=  1,150,  1, order=  1,  2,  3/
+&bcdef bcdir='eta', block=  2, bctype=7, start=  1,  1,  1, end=240,  1,  1
+                  ,iblock=  7,          istart=  1, 40,  1,iend=240, 40,  1, order=  1,  2,  3/
+&bcdef bcdir='xie', block=  3, bctype=7, start=240,  1,  1, end=240,150,  1
+                  ,iblock=  4,          istart=  1,  1,  1,iend=  1,150,  1, order=  1,  2,  3/
+&bcdef bcdir='xie', block=  4, bctype=7, start=240,  1,  1, end=240,150,  1
+                  ,iblock=  5,          istart=  1,  1,  1,iend=  1,150,  1, order=  1,  2,  3/
+&bcdef bcdir='xie', block=  6, bctype=7, start=200,  1,  1, end=200, 40,  1
+                  ,iblock=  7,          istart=  1,  1,  1,iend=  1, 40,  1, order=  1,  2,  3/
+&bcdef bcdir='xie', block=  7, bctype=7, start=240,  1,  1, end=240, 40,  1
+                  ,iblock=  8,          istart=  1,  1,  1,iend=  1, 40,  1, order=  1,  2,  3/
+&bcdef bcdir='eta', block=  1, bctype=3, start=  1,  1,  1, end=240,  1,  1/
+&bcdef bcdir='eta', block=  1, bctype=3, start=  1,150,  1, end=240,150,  1/
+ 
+ 
+&bcdef bcdir='eta', block=  2, bctype=3, start=  1,150,  1, end=240,150,  1/
+ 
+ 
+&bcdef bcdir='eta', block=  3, bctype=3, start=  1,  1,  1, end=240,  1,  1/
+&bcdef bcdir='eta', block=  3, bctype=3, start=  1,150,  1, end=240,150,  1/
+ 
+ 
+&bcdef bcdir='eta', block=  4, bctype=3, start=  1,  1,  1, end=240,  1,  1/
+&bcdef bcdir='eta', block=  4, bctype=3, start=  1,150,  1, end=240,150,  1/
+ 
+ 
+&bcdef bcdir='eta', block=  5, bctype=3, start=  1,  1,  1, end=240,  1,  1/
+&bcdef bcdir='eta', block=  5, bctype=3, start=  1,150,  1, end=240,150,  1/
+ 
+ 
+&bcdef bcdir='xie', block=  6, bctype=3, start=  1,  1,  1, end=  1, 40,  1/
+&bcdef bcdir='eta', block=  6, bctype=3, start=  1,  1,  1, end=200,  1,  1/
+&bcdef bcdir='eta', block=  6, bctype=3, start=  1, 40,  1, end=200, 40,  1/
+ 
+ 
+&bcdef bcdir='eta', block=  7, bctype=3, start=  1,  1,  1, end=240,  1,  1/
+ 
+ 
+&bcdef bcdir='xie', block=  8, bctype=3, start=200,  1,  1, end=200, 40,  1/
+&bcdef bcdir='eta', block=  8, bctype=3, start=  1,  1,  1, end=200,  1,  1/
+&bcdef bcdir='eta', block=  8, bctype=3, start=  1, 40,  1, end=200, 40,  1/
+ 
+ 
+&bcdef bcdir='end'/

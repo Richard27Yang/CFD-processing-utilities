@@ -162,16 +162,13 @@ c        write(filename, '("bin_3d_",i3.3,".dat")') n
            do i = 1, il(n)+1
               read(9) b(n).xx(i,j,k), 
      $                 b(n).yy(i,j,k)
-              b(n).zz(i,j,k)   = 0.0 !layer 1
+              b(n).zz(i,j,k)   = 0.0 !layer 1 z =0.0
 
-              print*, b(n).xx(i,j,k),
-     $         b(n).yy(i,j,k), b(n).zz(i,j,k)
-
-              b(n).xx(i,j,k+1) = b(n).xx(i,j,k) !layer 2 
+              b(n).xx(i,j,k+1) = b(n).xx(i,j,k) !layer 2 , z = 0.5
               b(n).yy(i,j,k+1) = b(n).yy(i,j,k)
               b(n).zz(i,j,k+1) = 0.5
 
-              b(n).xx(i,j,k+2) = b(n).xx(i,j,k) !layer 3 
+              b(n).xx(i,j,k+2) = b(n).xx(i,j,k) !layer 3  z = 1.0
               b(n).yy(i,j,k+2) = b(n).yy(i,j,k)
               b(n).zz(i,j,k+2) = 1.0
            end do
@@ -180,18 +177,7 @@ c        write(filename, '("bin_3d_",i3.3,".dat")') n
        endif
        close(9)
 
-        do k = 1, kl(n)+1
-          do j = 1, jl(n)+1
-            do i = 1, il(n)+1
-              print*, b(n).xx(i,j,k), 
-     $                 b(n).yy(i,j,k), b(n).zz(i,j,k)
-            end do
-          end do
-        end do
-
-       print*, "finish reading mesh"
-
-c----------center points on surface
+c----------center points on surface------------------------------------
 
         i=1
         do k=1,kl(n)
@@ -264,7 +250,7 @@ c--------------------------------------------
         end do       
       end do    
 c---------------------------END OF read mesh----------------------     
-      print*, "finsh generate surface center"
+c      print*, "finsh generate surface center"
 c---------------------------make a box for each face--------------
       do n=1,nb
          do nf=1,6
@@ -350,13 +336,7 @@ c---------------------------make a box for each face--------------
          end do
       end do
 
-      do n=1,nb
-         do nf=1,6
-           print*, "Box", xmin(n,nf), xmax(n,nf),ymin(n,nf)
-     $       , ymax(n,nf) ,zmin(n,nf),  zmax(n,nf)
-         enddo
-      enddo
-      print*, "finsh making box for each surface"
+c      print*, "finsh making box for each surface"
 c--------------------END OF-make a box for each face--------------   
 
 c--------------------BEGIN OF-matching blocks---------------------   
@@ -905,6 +885,14 @@ c---------------------xi-->xi-------------------------------------------
                        end do
                     end if
                  end if
+
+                 if(idimen.eq.2) then
+                    start(3) = 1
+                    endp(3) = 1
+                    istart(3) = 1
+                    iendp(3) = 1
+                 endif
+
                  write(12,998) bcdir,n,start(1),start(2),start(3),
      $                             endp(1),endp(2),endp(3)
                  write(12,999)   mb,istart(1),istart(2),istart(3),
@@ -1244,6 +1232,14 @@ c------------------------------xi-->eta---------------------------
                        end do
                     end do
                  end if
+
+                 if(idimen.eq.2) then
+                    start(3) = 1
+                    endp(3) = 1
+                    istart(3) = 1
+                    iendp(3) = 1
+                 endif
+
                  write(12,998) bcdir,n,start(1),start(2),start(3),
      $                             endp(1),endp(2),endp(3)
                  write(12,999)   mb,istart(1),istart(2),istart(3),
@@ -1260,7 +1256,7 @@ c detection of interface error and output warning message
                goto 12345
                  
                end if ! end if of 30000
-
+c               if(idimen .eq. 2) goto 55555
 c------------------------------xi-->zeta---------------------------
 50000          if ((nf.eq.1 .and.b(n).flag1(j,k).eq.'y') .or.
      $             (nf.eq.2 .and.b(n).flag2(j,k).eq.'y')) then !get the position of sub-block
@@ -1585,6 +1581,14 @@ c------------------------------xi-->zeta---------------------------
                        end do
                     end do
                  end if
+
+                 if(idimen.eq.2) then
+                    start(3) = 1
+                    endp(3) = 1
+                    istart(3) = 1
+                    iendp(3) = 1
+                 endif
+
                  write(12,998) bcdir,n,start(1),start(2),start(3),
      $                             endp(1),endp(2),endp(3)
                  write(12,999)   mb,istart(1),istart(2),istart(3),
@@ -1608,9 +1612,10 @@ c detection of interface error and output warning message
           end do
         end do
         end do ! END of do (nf=1,2)
-        
+
+
 c--------------343434343434343434----------------------------------------  
-        do nf=3,4       !nf=1,6
+55555   do nf=3,4               !nf=1,6
         bcdir='eta'
         if (nf.eq.3) then
            j=1
@@ -2144,6 +2149,14 @@ c---------------------xi-->xi-------------------------------------------
                        end do
                     end if
                  end if
+
+                 if(idimen.eq.2) then
+                    start(3) = 1
+                    endp(3) = 1
+                    istart(3) = 1
+                    iendp(3) = 1
+                 endif
+
                  write(12,998) bcdir,n,start(1),start(2),start(3),
      $                             endp(1),endp(2),endp(3)
                  write(12,999)   mb,istart(1),istart(2),istart(3),
@@ -2484,6 +2497,14 @@ c------------------------------xi-->eta---------------------------
                        end do
                     end do
                  end if
+
+                 if(idimen.eq.2) then
+                    start(3) = 1
+                    endp(3) = 1
+                    istart(3) = 1
+                    iendp(3) = 1
+                 endif
+
                  write(12,998) bcdir,n,start(1),start(2),start(3),
      $                             endp(1),endp(2),endp(3)
                  write(12,999)   mb,istart(1),istart(2),istart(3),
@@ -2500,7 +2521,7 @@ c detection of interface error and output warning message
                goto 22345
                  
                end if ! end if of 40000
-
+c               if(idimen.eq.2) goto 66666
 c------------------------------xi-->zeta---------------------------
 60000          if ((nf.eq.3 .and.b(n).flag3(i,k).eq.'y') .or.
      $             (nf.eq.4 .and.b(n).flag4(i,k).eq.'y')) then !get the position of sub-block
@@ -2825,6 +2846,14 @@ c------------------------------xi-->zeta---------------------------
                        end do
                     end do
                  end if
+
+                 if(idimen.eq.2) then
+                    start(3) = 1
+                    endp(3) = 1
+                    istart(3) = 1
+                    iendp(3) = 1
+                 endif
+
                  write(12,998) bcdir,n,start(1),start(2),start(3),
      $                             endp(1),endp(2),endp(3)
                  write(12,999)   mb,istart(1),istart(2),istart(3),
@@ -2851,8 +2880,7 @@ c detection of interface error and output warning message
 
 
 c--------------5656565656565656565656556-------------------------------------
-
-
+66666   if(idimen .eq. 2) goto 54321
         do nf=5,6       !nf=5,6        
         bcdir='zta'
         if (nf.eq.5) then
@@ -4097,12 +4125,12 @@ c detection of interface error and output warning message
         write(12,*)                                     
         
 c---------------------------------------------------------------------------        
-      end  do ! end of (n=1,NB)
+54321 end  do                   ! end of (n=1,NB)
 
 
 
 
-
+      
 c---------------block boundary needs to modify-----------------------------
       do n=1,NB
          nf=1
@@ -4139,6 +4167,14 @@ c---------------block boundary needs to modify-----------------------------
                 b(n).flag1(j,k)='y'
              end do
           end do
+
+          if(idimen.eq.2) then
+             start(3) = 1
+             endp(3) = 1
+             istart(3) = 1
+             iendp(3) = 1
+          endif
+
           write(12,995) bcdir,n,start(1),start(2),start(3),
      $                    endp(1),endp(2),endp(3)
           goto 10
@@ -4178,6 +4214,14 @@ c------------------------
                 b(n).flag2(j,k)='y'
              end do
           end do
+
+          if(idimen.eq.2) then
+             start(3) = 1
+             endp(3) = 1
+             istart(3) = 1
+             iendp(3) = 1
+          endif
+
            write(12,995) bcdir,n,start(1),start(2),start(3),
      $                    endp(1),endp(2),endp(3)
           goto 20
@@ -4218,6 +4262,14 @@ c------------------------
                 b(n).flag3(i,k)='y'
              end do
           end do
+
+          if(idimen.eq.2) then
+             start(3) = 1
+             endp(3) = 1
+             istart(3) = 1
+             iendp(3) = 1
+          endif
+
            write(12,995) bcdir,n,start(1),start(2),start(3),
      $                    endp(1),endp(2),endp(3)
           goto 30
@@ -4257,11 +4309,21 @@ c------------------------
                 b(n).flag4(i,k)='y'
              end do
           end do
+
+          if(idimen.eq.2) then
+             start(3) = 1
+             endp(3) = 1
+             istart(3) = 1
+             iendp(3) = 1
+          endif
+
            write(12,995) bcdir,n,start(1),start(2),start(3),
      $                    endp(1),endp(2),endp(3)
           goto 40
 c--------------------------------
 501      nf=5
+
+          if(idimen.eq.2) goto 701
 
          bcdir='zta'
          start(3)=1
@@ -4296,6 +4358,14 @@ c--------------------------------
                 b(n).flag5(i,j)='y'
              end do
           end do
+
+          if(idimen.eq.2) then
+             start(3) = 1
+             endp(3) = 1
+             istart(3) = 1
+             iendp(3) = 1
+          endif
+
            write(12,995) bcdir,n,start(1),start(2),start(3),
      $                    endp(1),endp(2),endp(3)
           goto 50
@@ -4335,6 +4405,14 @@ c--------------------------------
                 b(n).flag6(i,j)='y'
              end do
           end do
+
+          if(idimen.eq.2) then
+             start(3) = 1
+             endp(3) = 1
+             istart(3) = 1
+             iendp(3) = 1
+          endif
+
            write(12,995) bcdir,n,start(1),start(2),start(3),
      $                    endp(1),endp(2),endp(3)
           goto 60
