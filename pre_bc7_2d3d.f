@@ -99,7 +99,7 @@ c
      $           zmin(nb,6),zmax(nb,6))      
       do i=1,nb
          read(1, *) iL(i),jL(i),kL(i)
-         if(idimen .eq. 2) kL(i) = kL(i)-1
+         if(idimen .eq. 2) kL(i) = 2
          z_size(1,i)=il(i)+1
          z_size(2,i)=jl(i)+1
          z_size(3,i)=kl(i)+1
@@ -130,10 +130,10 @@ c *** read mesh information of current block fn
 c        write(filename, '("bin_3d_",i3.3,".dat")') n
         open(9, file=filename, form='unformatted')
 
-        if(idimen .eq. 2) then 
+        if(idimen .eq. 2) then !2d 
            read(9) iltp, jltp
-           kltp  = 1
-           kl(n) = 1
+           kltp  = 2
+           kl(n) = 2
         endif
 
         if(idimen .eq. 3) read(9) iltp, jltp, kltp
@@ -155,6 +155,7 @@ c        write(filename, '("bin_3d_",i3.3,".dat")') n
             end do
           end do
         end do
+
         else ! 2d read mesh
            k     = 1
           do j = 1, jl(n)+1
@@ -163,14 +164,31 @@ c        write(filename, '("bin_3d_",i3.3,".dat")') n
      $                 b(n).yy(i,j,k)
               b(n).zz(i,j,k)   = 0.0 !layer 1
 
+              print*, b(n).xx(i,j,k),
+     $         b(n).yy(i,j,k), b(n).zz(i,j,k)
+
               b(n).xx(i,j,k+1) = b(n).xx(i,j,k) !layer 2 
               b(n).yy(i,j,k+1) = b(n).yy(i,j,k)
-              b(n).zz(i,j,k+1) = 1.0
+              b(n).zz(i,j,k+1) = 0.5
+
+              b(n).xx(i,j,k+2) = b(n).xx(i,j,k) !layer 3 
+              b(n).yy(i,j,k+2) = b(n).yy(i,j,k)
+              b(n).zz(i,j,k+2) = 1.0
            end do
           end do
-          
+         
        endif
        close(9)
+
+        do k = 1, kl(n)+1
+          do j = 1, jl(n)+1
+            do i = 1, il(n)+1
+              print*, b(n).xx(i,j,k), 
+     $                 b(n).yy(i,j,k), b(n).zz(i,j,k)
+            end do
+          end do
+        end do
+
        print*, "finish reading mesh"
 
 c----------center points on surface
@@ -331,8 +349,16 @@ c---------------------------make a box for each face--------------
             end if
          end do
       end do
-c--------------------END OF-make a box for each face--------------   
+
+      do n=1,nb
+         do nf=1,6
+           print*, "Box", xmin(n,nf), xmax(n,nf),ymin(n,nf)
+     $       , ymax(n,nf) ,zmin(n,nf),  zmax(n,nf)
+         enddo
+      enddo
       print*, "finsh making box for each surface"
+c--------------------END OF-make a box for each face--------------   
+
 c--------------------BEGIN OF-matching blocks---------------------   
       do n=1,NB
         b(n).flag1(:,:)='n'
@@ -2821,13 +2847,13 @@ c detection of interface error and output warning message
 22345   i3=1                                    
           end do
         end do                
-        end do         !nf=1,6
+        end do         !nf=3,4
 
 
 c--------------5656565656565656565656556-------------------------------------
 
 
-        do nf=5,6       !nf=1,6        
+        do nf=5,6       !nf=5,6        
         bcdir='zta'
         if (nf.eq.5) then
            k=1
@@ -4065,7 +4091,7 @@ c detection of interface error and output warning message
 32345     i3=1
           end do
         end do                
-        end do         !nf=1,6
+        end do         !nf=5,6
         
         write(12,*)
         write(12,*)                                     

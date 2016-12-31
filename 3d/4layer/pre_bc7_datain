@@ -1,0 +1,21 @@
+&bcdef bcdir='xie', block=  1, bctype=7, start= 10,  1,  1, end= 10, 10,  4
+                  ,iblock=  2,          istart=  1,  1,  1,iend=  1, 10,  4, order=  1,  2,  3/
+ 
+ 
+ 
+ 
+&bcdef bcdir='xie', block=  1, bctype=3, start=  1,  1,  1, end=  1, 10,  4/
+&bcdef bcdir='eta', block=  1, bctype=3, start=  1,  1,  1, end= 10,  1,  4/
+&bcdef bcdir='eta', block=  1, bctype=3, start=  1, 10,  1, end= 10, 10,  4/
+&bcdef bcdir='zta', block=  1, bctype=3, start=  1,  1,  1, end= 10, 10,  1/
+&bcdef bcdir='zta', block=  1, bctype=3, start=  1,  1,  4, end= 10, 10,  4/
+ 
+ 
+&bcdef bcdir='xie', block=  2, bctype=3, start= 10,  1,  1, end= 10, 10,  4/
+&bcdef bcdir='eta', block=  2, bctype=3, start=  1,  1,  1, end= 10,  1,  4/
+&bcdef bcdir='eta', block=  2, bctype=3, start=  1, 10,  1, end= 10, 10,  4/
+&bcdef bcdir='zta', block=  2, bctype=3, start=  1,  1,  1, end= 10, 10,  1/
+&bcdef bcdir='zta', block=  2, bctype=3, start=  1,  1,  4, end= 10, 10,  4/
+ 
+ 
+&bcdef bcdir='end'/
