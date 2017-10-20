@@ -55,9 +55,7 @@
 &bcdef bcdir='xie',block=5,bctype= 7,    start= 240, 1,  1,  end= 240, 150, 1,
 		  iblock=1,             istart= 1,  1,  1, iend=  1, 150, 1, order=1,2,3/
 
-
 &bcdef bcdir='end'/
-
 &bcwake wbcdir='end'/
 &spec_output optype = 'end'/
 
